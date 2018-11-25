@@ -8,8 +8,8 @@
 
    <div class="container">
       <div class="jumbotron">
-        <h1 style="color:white; text-align: center;">Park'n'Roll</h1>
-        <p style="color:white; text-align: center;">We make your life simpler</p>
+        <h1 style="color:white; text-align: center;">Reserve a spot</h1>
+        <p style="color:white; text-align: center;">No worries, we got this </p>
       </div>
      {%- with messages = get_flashed_messages(with_categories=True) %}
   {%- if messages %}
@@ -21,6 +21,11 @@
   {%- endif %}
   {%- endwith %}
    <div class="col-md-12">
-       {{wtf.quick_form(form, novalidate=False)}}
+     {% if not request.args.get('legacy') -%}
+       {{wtf.quick_form(form, novalidate=True)}}
+     {%- else -%}
+         <p>LAAAAAL</p>
+       {{form|render_form()}}
+     {%- endif %}
    </div>
 {%- endblock %}
